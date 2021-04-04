@@ -37,7 +37,7 @@ var formSubmitHandler = function (event) {
               console.log(data);
             //   console.log(data.weather[0].main);
             
-            $("#temp-data").text('Temp: ' + data.main.temp + '&#730;F');
+            $("#temp-data").text('Temp: ' + data.main.temp + '°F');
             $("#humidity-data").text('Humidity: ' + data.main.humidity + '%');
             $('#wind-data').text('Wind: ' + data.wind.speed + 'MPH');
               
@@ -58,11 +58,28 @@ var formSubmitHandler = function (event) {
       });
   };
 
+  // to make first character uppercase
   function ucwords (str) {
     return (str + '').replace(/^([a-z])|\s+([a-z])/g, function ($1) {
         return $1.toUpperCase();
     });
 }
 
-  weatherFormEl.addEventListener('submit', formSubmitHandler);
+var fURL = 'https://api.openweathermap.org/data/2.5/forecast/daily?q=Sydney&cnt=5&appid=ec32f644e87a04b44e029ac50951cad5';
+fetch(fURL)
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (data) {
+              console.log(data);
+            });
+        } else {
+          alert('Error: ' + response.statusText);
+        }
+      })
+      .catch(function (error) {
+        alert('Unable to connect to OpenWeather');
+      });
+
+
+weatherFormEl.addEventListener('submit', formSubmitHandler);
 
