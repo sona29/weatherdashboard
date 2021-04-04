@@ -44,7 +44,7 @@ var formSubmitHandler = function (event) {
               console.log('longitude:'+ data.coord.lon)
               console.log('lat:'+ data.coord.lat)
               var iconcode = data.weather[0].icon;
-              var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
+              var iconurl = "https://openweathermap.org/img/w/" + iconcode + ".png";
               $('#wicon').attr('src', iconurl);
               $('#result-top').show();
             
