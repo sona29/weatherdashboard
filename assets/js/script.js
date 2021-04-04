@@ -27,7 +27,7 @@ var formSubmitHandler = function (event) {
 
 
   var getCurrentWeather = function (city) {
-    var apiUrl = 'http://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=ec32f644e87a04b44e029ac50951cad5';
+    var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=ec32f644e87a04b44e029ac50951cad5';
     console.log(apiUrl);
   
     fetch(apiUrl)
