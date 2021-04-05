@@ -1,9 +1,9 @@
 var weatherFormEl = document.querySelector('#weather-form');
 var cityName = document.querySelector('#city-name');
 var cityInputEl = document.querySelector('#city');
-
-
 var today = moment();
+
+var citySearched = [];
 
 
 var formSubmitHandler = function (event) {
@@ -14,7 +14,11 @@ var formSubmitHandler = function (event) {
     if (cityName) {
       $("#city-name").text(ucwords(cityName));    
       $("#today-date").text(today.format("MM-DD-YYYY"));
-      getCurrentWeather(cityName);        
+      getCurrentWeather(cityName); 
+      fiveDayForecast(cityName); 
+      citySearched.push(cityName);  
+      console.log(citySearched);
+      localStorage.setItem('city', cityName);    
         // cityInputEl.value = '';
     } 
     
@@ -23,20 +27,15 @@ var formSubmitHandler = function (event) {
     }
   };
 
-  // apiUrl = 'http://api.openweathermap.org/data/2.5/weather?q=Sydney&appid=ec32f644e87a04b44e029ac50951cad5';
-
-
+  // getting current weather
   var getCurrentWeather = function (city) {
     var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=ec32f644e87a04b44e029ac50951cad5';
-    console.log(apiUrl);
+   
   
     fetch(apiUrl)
       .then(function (response) {
         if (response.ok) {
-          response.json().then(function (data) {
-              console.log(data);
-            //   console.log(data.weather[0].main);
-            
+          response.json().then(function (data) {         
             $("#temp-data").text('Temp: ' + data.main.temp + '°F');
             $("#humidity-data").text('Humidity: ' + data.main.humidity + '%');
             $('#wind-data').text('Wind: ' + data.wind.speed + 'MPH');
@@ -66,17 +65,28 @@ var formSubmitHandler = function (event) {
 }
 
 // var fURL = 'http://api.openweathermap.org/data/2.5/forecast?appid=ec32f644e87a04b44e029ac50951cad5&q=Sydney&count=6';
-var fURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=33.441792&lon=-94.037689&exclude=hourly,minutely&appid=ec32f644e87a04b44e029ac50951cad5';
+var fiveDayForecast = function (city){
+  var fURL = 'https://api.openweathermap.org/data/2.5/forecast?q='+ city +'&appid=ec32f644e87a04b44e029ac50951cad5&units=imperial';
 
 
 fetch(fURL)
       .then(function (response) {
         if (response.ok) {
-          response.json().then(function (data) {
-            console.log(data.daily);
-              // console.log(data.list[0]);
-              for(var i=0;i<8;i++){
-                console.log(i.temp.day);
+          response.json().then(function (data) {           
+            
+              var j=0;
+              for(var i=0;i<40;i+=8){
+                
+                $("#forecast-date-"+j).text(data.list[i].dt_txt);
+                var iconcode = data.list[i].weather[0].icon;
+                var iconurl = "https://openweathermap.org/img/w/" + iconcode + ".png";
+                $('#forecast-icon-'+j).attr('src', iconurl);
+                $("#forecast-temp-"+j).text("Temp: " + data.list[i].main.temp +'°F');
+                $("#forecast-wind-"+j).text("Wind: " + data.list[i].wind.speed + "MPH");
+                $("#forecast-humidity-"+j).text("Humidity: " + data.list[i].main.humidity + "%");        
+                
+                
+                j++
               }
             });
         } else {
@@ -87,6 +97,10 @@ fetch(fURL)
         alert('Unable to connect to OpenWeather');
       });
 
+    };
+
+
+   
 
 weatherFormEl.addEventListener('submit', formSubmitHandler);
 
