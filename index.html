@@ -20,52 +20,86 @@
     </div>
   </header>
   
-  <div class="container-fluid">  
+  <div class="container-fluid">   
 
- 
-
-   <!-- Two column layout -->
+   <!-- Search Form -->
    <section class="container my-5">
     <div class="row">
 
       <div class="col-12 col-md-4 col-xl-3">
         <h3>Search for a city</h3>
                 
-          <form id="weather-form">  
-            <div class="form-group">     
-            <input name="city" id="city" type="text" autofocus="true" class="form-input"/>
-            
-          </div> 
-          <button type="submit" class="btn btn-primary">Search</button>  
-            
+          <form id="weather-form">
+            <div class="form-group">
+              <input name="city" id="city" type="text" autofocus="true" class="form-input"/>
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>  
           </form>
-
-          
-        
       </div>
 
+    <!-- Top result section -->
       <div class="col-12 col-md-8 col-xl-9 top-result" id="result-top">
-        <h2 class="subtitle" id="city-name"></h2><span id="today-date"></span>
-        <div id="icon"><img id="wicon" src="" alt="Weather icon"></div>
-        <div id="temp-data" class="list-group"></div>
-        <div id="wind-data" class="list-group"></div>
-        <div id="humidity-data" class="list-group"></div>
+          <h2 class="subtitle" id="city-name"></h2><span id="today-date"></span>
+          <div id="icon"><img id="wicon" src="" alt="Weather icon"></div>
+          <div id="temp-data" class="list-group"></div>
+          <div id="wind-data" class="list-group"></div>
+          <div id="humidity-data" class="list-group"></div>
+
+          <!-- five day forecast -->
+          <div class="row">
+            <div class="col">
+              <div id="forecast-date-0"></div>
+              <div><img class="temp-icon" src="" alt="Weather icon" id="forecast-icon-0"></div>
+              <div id="forecast-temp-0"></div>
+              <div id="forecast-wind-0"></div>
+              <div id="forecast-humidity-0"></div>              
+            </div>
+
+            <div class="col">
+              <div id="forecast-date-1"></div>
+              <div><img class="temp-icon" src="" alt="Weather icon" id="forecast-icon-1"></div>
+              <div id="forecast-temp-1"></div>
+              <div id="forecast-wind-1"></div>
+              <div id="forecast-humidity-1"></div>   
+            </div>
+
+            <div class="col">
+              <div id="forecast-date-2"></div>
+              <div><img class="temp-icon" src="" alt="Weather icon" id="forecast-icon-2"></div>
+              <div id="forecast-temp-2"></div>
+              <div id="forecast-wind-2"></div>
+              <div id="forecast-humidity-2"></div>  
+            </div>
+
+            <div class="col">
+              <div id="forecast-date-3"></div>
+              <div><img class="temp-icon" src="" alt="Weather icon" id="forecast-icon-3"></div>
+              <div id="forecast-temp-3"></div>
+              <div id="forecast-wind-3"></div>
+              <div id="forecast-humidity-3"></div>  
+            </div>
+
+            <div class="col">
+              <div id="forecast-date-4"></div>
+              <div><img class="temp-icon" src="" alt="Weather icon" id="forecast-icon-4"></div>
+              <div id="forecast-temp-4"></div>
+              <div id="forecast-wind-4"></div>
+              <div id="forecast-humidity-4"></div>  
+            </div>
+          </div>
+
       </div>
 
-     
+      
     </div>
   </section>
-
-
-
 
 </div>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-
-  <script src="./assets/js/script.js"></script>
+<script src="./assets/js/script.js"></script>
 
   
 </body>
