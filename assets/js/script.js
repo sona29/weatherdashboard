@@ -65,12 +65,15 @@ var formSubmitHandler = function (event) {
     });
 }
 
-var fURL = 'https://api.openweathermap.org/data/2.5/forecast/daily?q=Sydney&cnt=5&appid=ec32f644e87a04b44e029ac50951cad5';
+var fURL = 'http://api.openweathermap.org/data/2.5/forecast?appid=ec32f644e87a04b44e029ac50951cad5&q=Sydney&count=6';
+
+
 fetch(fURL)
       .then(function (response) {
         if (response.ok) {
           response.json().then(function (data) {
-              console.log(data);
+            console.log(data);
+              console.log(data[0].list.main.id);
             });
         } else {
           alert('Error: ' + response.statusText);
