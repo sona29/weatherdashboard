@@ -65,7 +65,8 @@ var formSubmitHandler = function (event) {
     });
 }
 
-var fURL = 'http://api.openweathermap.org/data/2.5/forecast?appid=ec32f644e87a04b44e029ac50951cad5&q=Sydney&count=6';
+// var fURL = 'http://api.openweathermap.org/data/2.5/forecast?appid=ec32f644e87a04b44e029ac50951cad5&q=Sydney&count=6';
+var fURL = 'https://pro.openweathermap.org/data/2.5/forecast/climate?q=London&appid=ec32f644e87a04b44e029ac50951cad5&count=6';
 
 
 fetch(fURL)
@@ -73,7 +74,7 @@ fetch(fURL)
         if (response.ok) {
           response.json().then(function (data) {
             console.log(data);
-              console.log(data[0].list.main.id);
+              console.log(data.list[0]);
             });
         } else {
           alert('Error: ' + response.statusText);
