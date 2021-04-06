@@ -3,7 +3,7 @@ var cityName = document.querySelector('#city-name');
 var cityInputEl = document.querySelector('#city');
 var today = moment();
 
-var citySearched = [];
+// var citySearched = [];
 
 
 var formSubmitHandler = function (event) {
@@ -16,10 +16,7 @@ var formSubmitHandler = function (event) {
       $("#today-date").text(today.format("MM-DD-YYYY"));
       getCurrentWeather(cityName); 
       fiveDayForecast(cityName);
-      // pushing into array name of city searched 
-      citySearched.push(cityName);  
-      // storing on local storage 
-      localStorage.setItem('city', JSON.stringify(citySearched));    
+        
         // cityInputEl.value = '';
     } 
     
@@ -36,7 +33,8 @@ var formSubmitHandler = function (event) {
     fetch(apiUrl)
       .then(function (response) {
         if (response.ok) {
-          response.json().then(function (data) {         
+          response.json().then(function (data) {
+            saveCity(city);                    
             $("#temp-data").text('Temp: ' + data.main.temp + '°F');
             $("#humidity-data").text('Humidity: ' + data.main.humidity + '%');
             $('#wind-data').text('Wind: ' + data.wind.speed + 'MPH');
@@ -100,7 +98,7 @@ fetch(fURL)
 
     };
 
-
+// to display stored cities
 var cityStored = JSON.parse(localStorage.getItem("city")) || [];
     
 if(cityStored.length){
@@ -109,7 +107,7 @@ if(cityStored.length){
     var cityButton = $('<input/>').attr({
       type:"button",
       id: cityStored[i],
-      class: 'btn-block',
+      class: 'btn-block btn-city',
       value: ucwords(cityStored[i])
     });
     
@@ -117,6 +115,18 @@ if(cityStored.length){
   }
 }
 
+
+function saveCity(city) {
+  // get localStorage parsed, or an empty array if null
+  var citySearched = JSON.parse(localStorage.getItem("city")) || [];
+  // checking if city is already stored in the array
+  if(citySearched.indexOf(city) === -1){
+    // push city to it
+    citySearched.push(city);
+  }
+  // write it back to localStorage
+  localStorage.setItem('city', JSON.stringify(citySearched)); 
+}
    
 
 weatherFormEl.addEventListener('submit', formSubmitHandler);
