@@ -15,10 +15,11 @@ var formSubmitHandler = function (event) {
       $("#city-name").text(ucwords(cityName));    
       $("#today-date").text(today.format("MM-DD-YYYY"));
       getCurrentWeather(cityName); 
-      fiveDayForecast(cityName); 
+      fiveDayForecast(cityName);
+      // pushing into array name of city searched 
       citySearched.push(cityName);  
-      console.log(citySearched);
-      localStorage.setItem('city', cityName);    
+      // storing on local storage 
+      localStorage.setItem('city', JSON.stringify(citySearched));    
         // cityInputEl.value = '';
     } 
     
@@ -99,6 +100,22 @@ fetch(fURL)
 
     };
 
+
+var cityStored = JSON.parse(localStorage.getItem("city")) || [];
+    
+if(cityStored.length){
+  for(i=0;i<cityStored.length;i++){
+    console.log(cityStored[i]);
+    var cityButton = $('<input/>').attr({
+      type:"button",
+      id: cityStored[i],
+      class: 'btn-block',
+      value: ucwords(cityStored[i])
+    });
+    
+    $('#cities').append(cityButton);
+  }
+}
 
    
 
