@@ -14,7 +14,7 @@
 
 <body>
 
-  <header class="container-fluid bg-dark text-light mb-5 p-3">
+  <header class="container-fluid bg-dark text-light mb-5 p-3 grad">
     <div class="d-flex align-items-center">
       <h1><i class="fas fa-cloud-moon-rain"></i>Weather Dashboard</h1>      
     </div>
@@ -31,9 +31,9 @@
                 
           <form id="weather-form">
             <div class="form-group">
-              <input name="city" id="city" type="text" autofocus="true" class="form-input"/>
+              <input name="city" id="city" type="text" autofocus="true" class="form-control"/>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Search</button>  
+            <button type="submit" class="btn btn-primary btn-block btn-green">Search</button>  
           </form>
 
          
@@ -42,15 +42,18 @@
 
     <!-- Top result section -->
       <div class="col-12 col-md-8 col-xl-9 top-result" id="result-top">
-          <h2 class="subtitle" id="city-name"></h2><span id="today-date"></span>
-          <div id="icon"><img id="wicon" src="" alt="Weather icon"></div>
+        <div class="top-section">
+          <span class="subtitle" id="city-name"></span><span id="today-date"></span>
+          <span id="icon"><img id="wicon" src="" alt="Weather icon"></span>
           <div id="temp-data" class="list-group"></div>
           <div id="wind-data" class="list-group"></div>
           <div id="humidity-data" class="list-group"></div>
+        </div>
 
           <!-- five day forecast -->
+          <span>5 day Forecast</span>
           <div class="row">
-            <div class="col">
+            <div class="col forecast-section">
               <div id="forecast-date-0"></div>
               <div><img class="temp-icon" src="" alt="Weather icon" id="forecast-icon-0"></div>
               <div id="forecast-temp-0"></div>
@@ -58,7 +61,7 @@
               <div id="forecast-humidity-0"></div>              
             </div>
 
-            <div class="col">
+            <div class="col forecast-section">
               <div id="forecast-date-1"></div>
               <div><img class="temp-icon" src="" alt="Weather icon" id="forecast-icon-1"></div>
               <div id="forecast-temp-1"></div>
@@ -66,7 +69,7 @@
               <div id="forecast-humidity-1"></div>   
             </div>
 
-            <div class="col">
+            <div class="col forecast-section">
               <div id="forecast-date-2"></div>
               <div><img class="temp-icon" src="" alt="Weather icon" id="forecast-icon-2"></div>
               <div id="forecast-temp-2"></div>
@@ -74,7 +77,7 @@
               <div id="forecast-humidity-2"></div>  
             </div>
 
-            <div class="col">
+            <div class="col forecast-section">
               <div id="forecast-date-3"></div>
               <div><img class="temp-icon" src="" alt="Weather icon" id="forecast-icon-3"></div>
               <div id="forecast-temp-3"></div>
@@ -82,7 +85,7 @@
               <div id="forecast-humidity-3"></div>  
             </div>
 
-            <div class="col">
+            <div class="col forecast-section">
               <div id="forecast-date-4"></div>
               <div><img class="temp-icon" src="" alt="Weather icon" id="forecast-icon-4"></div>
               <div id="forecast-temp-4"></div>
