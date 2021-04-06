@@ -1,4 +1,24 @@
+body {
+  /* setting website font */
+  font-family: "Titillium Web", sans-serif;
+  background-color: #f9fbfd;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Merriweather", serif;
+  font-weight: 700;
+}
+
 .top-result {
   display: none;
   border: 1px solid blue;
+}
+
+.display-cities {
+  margin-top: 20px;
 }
