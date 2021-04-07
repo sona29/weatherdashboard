@@ -118,6 +118,14 @@ if(cityStored.length){
     });
   
     $('#cities').append(cityButton);
+    $( ".btn-city" ).click(function() {
+      var city = $(this).attr('id');
+        $("#city-name").text(ucwords(city));    
+      $("#today-date").text(today.format("MM-DD-YYYY"));
+      getCurrentWeather(city); 
+      fiveDayForecast(city);
+          
+    });
   }
 }
 }
@@ -158,13 +166,11 @@ fetch(fURL)
               $("#uv-data").css('background','#73ad21');
             }
             if(uvValue>2 && uvValue<=5){
-              $("#uv-data").css('background','#FFFF00');
+              $("#uv-data").css('background','#e6e600');
             }
             if(uvValue>5){
               $("#uv-data").css('background','#FF0000');
             }
-
-
               
             });
         } else {
@@ -178,8 +184,7 @@ fetch(fURL)
     };
 
     $(document).ready(function(){
-      $(".btn-city").click(function() {
-        alert("here");
+      $(".btn-city").click(function() {       
         var city = $(this).attr('id');
         $("#city-name").text(ucwords(city));    
       $("#today-date").text(today.format("MM-DD-YYYY"));
@@ -191,7 +196,5 @@ fetch(fURL)
 
 displayCity();
 
-$( ".btn-city" ).click(function() {
-  alert( "Handler for .click() called." );
-});
+
 
