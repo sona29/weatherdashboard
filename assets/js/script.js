@@ -16,6 +16,7 @@ var formSubmitHandler = function (event) {
       $("#today-date").text(today.format("MM-DD-YYYY"));
       getCurrentWeather(cityName); 
       fiveDayForecast(cityName);
+      saveCity(cityName);
       displayCity();
         
         // cityInputEl.value = '';
@@ -106,6 +107,7 @@ function displayCity(){
 var cityStored = JSON.parse(localStorage.getItem("city")) || [];
     
 if(cityStored.length){
+  $('#cities').empty();
   for(i=0;i<cityStored.length;i++){
     console.log(cityStored[i]);
     var cityButton = $('<input/>').attr({
@@ -177,6 +179,7 @@ fetch(fURL)
 
     $(document).ready(function(){
       $(".btn-city").click(function() {
+        alert("here");
         var city = $(this).attr('id');
         $("#city-name").text(ucwords(city));    
       $("#today-date").text(today.format("MM-DD-YYYY"));
@@ -187,3 +190,4 @@ fetch(fURL)
 });
 
 displayCity();
+
