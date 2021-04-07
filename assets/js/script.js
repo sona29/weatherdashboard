@@ -9,13 +9,14 @@ var today = moment();
 var formSubmitHandler = function (event) {
     event.preventDefault();      
     var cityName = cityInputEl.value.trim();
-    console.log(cityName);
+    
   
     if (cityName) {
       $("#city-name").text(ucwords(cityName));    
       $("#today-date").text(today.format("MM-DD-YYYY"));
       getCurrentWeather(cityName); 
       fiveDayForecast(cityName);
+      displayCity();
         
         // cityInputEl.value = '';
     } 
@@ -41,6 +42,8 @@ var formSubmitHandler = function (event) {
               
               console.log('longitude:'+ data.coord.lon)
               console.log('lat:'+ data.coord.lat)
+
+              uvIndex(data.coord.lat,data.coord.lon);
               var iconcode = data.weather[0].icon;
               var iconurl = "https://openweathermap.org/img/w/" + iconcode + ".png";
               $('#wicon').attr('src', iconurl);
@@ -99,6 +102,7 @@ fetch(fURL)
     };
 
 // to display stored cities
+function displayCity(){
 var cityStored = JSON.parse(localStorage.getItem("city")) || [];
     
 if(cityStored.length){
@@ -114,6 +118,8 @@ if(cityStored.length){
     $('#cities').append(cityButton);
   }
 }
+}
+
 
 
 function saveCity(city) {
@@ -131,3 +137,53 @@ function saveCity(city) {
 
 weatherFormEl.addEventListener('submit', formSubmitHandler);
 
+
+
+
+var uvIndex = function (lat,lon){
+  var fURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat +'&lon='+ lon +'&exclude=hourly,daily,minutely&appid=ec32f644e87a04b44e029ac50951cad5';
+
+
+fetch(fURL)
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (data) {           
+            
+            var uvValue = parseInt(data.current.uvi);
+            console.log(uvValue);
+            $("#uv-data").text(data.current.uvi);
+            if(uvValue<=2){
+              $("#uv-data").css('background','#73ad21');
+            }
+            if(uvValue>2 && uvValue<=5){
+              $("#uv-data").css('background','#FFFF00');
+            }
+            if(uvValue>5){
+              $("#uv-data").css('background','#FF0000');
+            }
+
+
+              
+            });
+        } else {
+          alert('Error: ' + response.statusText);
+        }
+      })
+      .catch(function (error) {
+        alert('Unable to connect to OpenWeather');
+      });
+
+    };
+
+    $(document).ready(function(){
+      $(".btn-city").click(function() {
+        var city = $(this).attr('id');
+        $("#city-name").text(ucwords(city));    
+      $("#today-date").text(today.format("MM-DD-YYYY"));
+      getCurrentWeather(city); 
+      fiveDayForecast(city);
+          
+      });
+});
+
+displayCity();
