@@ -116,7 +116,7 @@ if(cityStored.length){
       class: 'btn-block btn-city',
       value: ucwords(cityStored[i])
     });
-    
+  
     $('#cities').append(cityButton);
   }
 }
@@ -190,4 +190,8 @@ fetch(fURL)
 });
 
 displayCity();
+
+$( ".btn-city" ).click(function() {
+  alert( "Handler for .click() called." );
+});
 
