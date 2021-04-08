@@ -3,23 +3,22 @@ var cityName = document.querySelector('#city-name');
 var cityInputEl = document.querySelector('#city');
 var today = moment();
 
-// var citySearched = [];
-
-
 var formSubmitHandler = function (event) {
     event.preventDefault();      
     var cityName = cityInputEl.value.trim();
     
   
     if (cityName) {
+      console.log();
       $("#city-name").text(ucwords(cityName));    
       $("#today-date").text(today.format("MM-DD-YYYY"));
       getCurrentWeather(cityName); 
+      // console.log("getCurrentWeather: ", getCurrentWeather(cityName));
+      // console.log('city exists'+ getCurrentWeather);
       fiveDayForecast(cityName);
       saveCity(cityName);
-      displayCity();
-        
-        // cityInputEl.value = '';
+      displayCity();      
+    
     } 
     
     else {
@@ -39,17 +38,13 @@ var formSubmitHandler = function (event) {
             saveCity(city);                    
             $("#temp-data").text('Temp: ' + data.main.temp + '°F');
             $("#humidity-data").text('Humidity: ' + data.main.humidity + '%');
-            $('#wind-data').text('Wind: ' + data.wind.speed + 'MPH');
-              
-              console.log('longitude:'+ data.coord.lon)
-              console.log('lat:'+ data.coord.lat)
-
-              uvIndex(data.coord.lat,data.coord.lon);
-              var iconcode = data.weather[0].icon;
-              var iconurl = "https://openweathermap.org/img/w/" + iconcode + ".png";
-              $('#wicon').attr('src', iconurl);
-              $('#result-top').show();
-            
+            $('#wind-data').text('Wind: ' + data.wind.speed + 'MPH');             
+             // to get uvindex
+             uvIndex(data.coord.lat,data.coord.lon);
+            var iconcode = data.weather[0].icon;
+            var iconurl = "https://openweathermap.org/img/w/" + iconcode + ".png";
+            $('#wicon').attr('src', iconurl);
+            $('#result-top').show();
           });
         } else {
           alert('Error: ' + response.statusText);
@@ -61,13 +56,13 @@ var formSubmitHandler = function (event) {
   };
 
   // to make first character uppercase
-  function ucwords (str) {
+function ucwords (str) {
     return (str + '').replace(/^([a-z])|\s+([a-z])/g, function ($1) {
         return $1.toUpperCase();
     });
 }
 
-// var fURL = 'http://api.openweathermap.org/data/2.5/forecast?appid=ec32f644e87a04b44e029ac50951cad5&q=Sydney&count=6';
+
 var fiveDayForecast = function (city){
   var fURL = 'https://api.openweathermap.org/data/2.5/forecast?q='+ city +'&appid=ec32f644e87a04b44e029ac50951cad5&units=imperial';
 
@@ -87,8 +82,6 @@ fetch(fURL)
                 $("#forecast-temp-"+j).text("Temp: " + data.list[i].main.temp +'°F');
                 $("#forecast-wind-"+j).text("Wind: " + data.list[i].wind.speed + "MPH");
                 $("#forecast-humidity-"+j).text("Humidity: " + data.list[i].main.humidity + "%");        
-                
-                
                 j++
               }
             });
@@ -102,7 +95,7 @@ fetch(fURL)
 
     };
 
-// to display stored cities
+// to display stored cities from local storage
 function displayCity(){
 var cityStored = JSON.parse(localStorage.getItem("city")) || [];
     
@@ -124,7 +117,6 @@ if(cityStored.length){
       $("#today-date").text(today.format("MM-DD-YYYY"));
       getCurrentWeather(city); 
       fiveDayForecast(city);
-          
     });
   }
 }
