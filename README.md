@@ -14,3 +14,7 @@
 - The following image shows the result section when a city is entered.
 
 ![after search](assets/images/five-result.png)
+
+## Link to deployed application
+
+https://sona29.github.io/weatherdashboard/
