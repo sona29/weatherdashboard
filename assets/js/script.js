@@ -5,8 +5,7 @@ var today = moment();
 
 var formSubmitHandler = function (event) {
     event.preventDefault();      
-    var cityName = cityInputEl.value.trim();
-    
+    var cityName = cityInputEl.value.trim();    
   
     if (cityName) {    
       $("#city-name").text(ucwords(cityName));    
@@ -23,8 +22,7 @@ var formSubmitHandler = function (event) {
 
   // getting current weather
   var getCurrentWeather = function (city) {
-    var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=ec32f644e87a04b44e029ac50951cad5';
-   
+    var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=ec32f644e87a04b44e029ac50951cad5';   
   
     fetch(apiUrl)
       .then(function (response) {      
@@ -102,7 +100,7 @@ var cityStored = JSON.parse(localStorage.getItem("city")) || [];
 if(cityStored.length){
   $('#cities').empty();
   for(i=0;i<cityStored.length;i++){
-    console.log(cityStored[i]);
+    
     var cityButton = $('<input/>').attr({
       type:"button",
       id: cityStored[i],
@@ -124,8 +122,7 @@ if(cityStored.length){
 
 
 
-function saveCity(city) {
-  console.log("function running");
+function saveCity(city) {  
   // get localStorage parsed, or an empty array if null
   var citySearched = JSON.parse(localStorage.getItem("city")) || [];
   // checking if city is already stored in the array
@@ -136,13 +133,8 @@ function saveCity(city) {
   // write it back to localStorage
   localStorage.setItem('city', JSON.stringify(citySearched)); 
 }
-   
 
-weatherFormEl.addEventListener('submit', formSubmitHandler);
-
-
-
-
+// function to get uv index
 var uvIndex = function (lat,lon){
   var fURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat +'&lon='+ lon +'&exclude=hourly,daily,minutely&appid=ec32f644e87a04b44e029ac50951cad5';
 
@@ -153,7 +145,7 @@ fetch(fURL)
           response.json().then(function (data) {           
             
             var uvValue = parseInt(data.current.uvi);
-            console.log(uvValue);
+           
             $("#uv-data").text(data.current.uvi);
             if(uvValue<=2){
               $("#uv-data").css('background','#73ad21');
@@ -188,6 +180,8 @@ fetch(fURL)
 });
 
 displayCity();
+
+weatherFormEl.addEventListener('submit', formSubmitHandler);
 
 
 
