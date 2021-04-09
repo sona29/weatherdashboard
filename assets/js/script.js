@@ -8,17 +8,12 @@ var formSubmitHandler = function (event) {
     var cityName = cityInputEl.value.trim();
     
   
-    if (cityName) {
-      console.log();
+    if (cityName) {    
       $("#city-name").text(ucwords(cityName));    
       $("#today-date").text(today.format("MM-DD-YYYY"));
-      getCurrentWeather(cityName); 
-      // console.log("getCurrentWeather: ", getCurrentWeather(cityName));
-      // console.log('city exists'+ getCurrentWeather);
-      fiveDayForecast(cityName);
-      saveCity(cityName);
-      displayCity();      
-    
+      getCurrentWeather(cityName);       
+      fiveDayForecast(cityName);      
+      displayCity();   
     } 
     
     else {
@@ -32,10 +27,12 @@ var formSubmitHandler = function (event) {
    
   
     fetch(apiUrl)
-      .then(function (response) {
+      .then(function (response) {      
+        
         if (response.ok) {
           response.json().then(function (data) {
-            saveCity(city);                    
+            saveCity(city);   
+            displayCity();                 
             $("#temp-data").text('Temp: ' + data.main.temp + '°F');
             $("#humidity-data").text('Humidity: ' + data.main.humidity + '%');
             $('#wind-data').text('Wind: ' + data.wind.speed + 'MPH');             
@@ -63,12 +60,15 @@ function ucwords (str) {
 }
 
 
+
+
 var fiveDayForecast = function (city){
   var fURL = 'https://api.openweathermap.org/data/2.5/forecast?q='+ city +'&appid=ec32f644e87a04b44e029ac50951cad5&units=imperial';
 
 
 fetch(fURL)
       .then(function (response) {
+       
         if (response.ok) {
           response.json().then(function (data) {           
             
@@ -125,6 +125,7 @@ if(cityStored.length){
 
 
 function saveCity(city) {
+  console.log("function running");
   // get localStorage parsed, or an empty array if null
   var citySearched = JSON.parse(localStorage.getItem("city")) || [];
   // checking if city is already stored in the array

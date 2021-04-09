@@ -13,7 +13,15 @@ h6 {
   font-family: "Titillium Web", sans-serif;
   font-weight: 700;
 }
-span {
+
+.subtitle {
+  padding: 10px;
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 700;
+  font-size: x-large;
+}
+
+#today-date {
   padding: 10px;
   font-family: "Titillium Web", sans-serif;
   font-weight: 700;
@@ -60,4 +68,31 @@ span {
 .btn-city {
   background-color: #c09a87;
   border-color: #c09a87;
+}
+
+#uv-data {
+  padding: 5px;
+  color: white;
+}
+
+@media screen and (max-width: 576px) {
+  .display-five {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .top-result {
+    margin-top: 20px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .display-five {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .top-result {
+    margin-top: 20px;
+  }
 }
