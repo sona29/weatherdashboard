@@ -57,9 +57,7 @@ function ucwords (str) {
     });
 }
 
-
-
-
+// function for getting 5 day forecast
 var fiveDayForecast = function (city){
   var fURL = 'https://api.openweathermap.org/data/2.5/forecast?q='+ city +'&appid=ec32f644e87a04b44e029ac50951cad5&units=imperial';
 
@@ -96,26 +94,24 @@ fetch(fURL)
 // to display stored cities from local storage
 function displayCity(){
 var cityStored = JSON.parse(localStorage.getItem("city")) || [];
-    
-if(cityStored.length){
-  $('#cities').empty();
-  for(i=0;i<cityStored.length;i++){
-    
-    var cityButton = $('<input/>').attr({
-      type:"button",
-      id: cityStored[i],
-      class: 'btn-block btn-city',
-      value: ucwords(cityStored[i])
-    });
-  
+    if(cityStored.length){
+      $('#cities').empty();
+      for(i=0;i<cityStored.length;i++){
+        // adding button for every stored city
+        var cityButton = $('<input/>').attr({
+          type:"button",
+          id: cityStored[i],
+          class: 'btn-block btn-city',
+          value: ucwords(cityStored[i])
+        });
     $('#cities').append(cityButton);
     $( ".btn-city" ).click(function() {
-      var city = $(this).attr('id');
-        $("#city-name").text(ucwords(city));    
-      $("#today-date").text(today.format("MM-DD-YYYY"));
-      getCurrentWeather(city); 
-      fiveDayForecast(city);
-    });
+    var city = $(this).attr('id');
+    $("#city-name").text(ucwords(city));    
+    $("#today-date").text(today.format("MM-DD-YYYY"));
+    getCurrentWeather(city); 
+    fiveDayForecast(city);
+  });
   }
 }
 }
@@ -172,12 +168,11 @@ fetch(fURL)
       $(".btn-city").click(function() {       
         var city = $(this).attr('id');
         $("#city-name").text(ucwords(city));    
-      $("#today-date").text(today.format("MM-DD-YYYY"));
-      getCurrentWeather(city); 
-      fiveDayForecast(city);
-          
+        $("#today-date").text(today.format("MM-DD-YYYY"));
+        getCurrentWeather(city); 
+        fiveDayForecast(city);
       });
-});
+    });
 
 displayCity();
 
