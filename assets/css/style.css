@@ -51,6 +51,7 @@ h6 {
   color: white;
 }
 
+/* setting gradient for top banner section */
 .grad {
   background-image: linear-gradient(
     140deg,
@@ -75,6 +76,7 @@ h6 {
   color: white;
 }
 
+/* for phone */
 @media screen and (max-width: 576px) {
   .display-five {
     display: flex;
@@ -86,6 +88,7 @@ h6 {
   }
 }
 
+/* for tablets */
 @media screen and (max-width: 768px) {
   .display-five {
     display: flex;
