@@ -16,10 +16,10 @@
 
 ![after search](assets/images/five-result.png)
 
-## Link to deployed application
-
 ## Techonology used
 
 HTML, CSS, Bootstrap, Server Side API, jQuery, localStorage
+
+## Link to deployed application
 
 https://sona29.github.io/weatherdashboard/
