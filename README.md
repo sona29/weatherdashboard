@@ -18,4 +18,8 @@
 
 ## Link to deployed application
 
+## Techonology used
+
+HTML, CSS, Bootstrap, Server Side API, jQuery, localStorage
+
 https://sona29.github.io/weatherdashboard/
