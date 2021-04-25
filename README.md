@@ -23,3 +23,11 @@ HTML, CSS, Bootstrap, Server Side API, jQuery, localStorage
 ## Link to deployed application
 
 https://sona29.github.io/weatherdashboard/
+
+## License
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## Contact
+
+Sona Shrestha (sona.shrestha004@gmail.com)
